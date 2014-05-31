@@ -8,12 +8,12 @@ improvements.  Thanks dude.
 As I didn't want to get involved with wiring buttons directly to the GPIO pins on my Pi
 and it seemed that for images to be selected some form of display would be needed, I
 opted for the [Adafruit 16x2 LCD plate with built in buttons][ada]. Assembly was simple
-but does require a certain level of dexterity with a soldering iron as there are many pins
-in a row that need to be soldered precisely.
+but it does require a certain level of dexterity with a soldering iron as there are many
+pins in a row that need to be soldered precisely.
 
-Of course, for the strip I used 2 metres of the [Adafruit Digital LED Strip][ada2], which
-I took delivery of today - so I guess the next step for this is making the scythe itself.
-Oh, I do so love making things &lt;/sarcasm&gt;
+Of course, for the strip I used 2 metres of the [Adafruit Digital LED Strip][ada2], so
+I guess the next step for this is making the scythe itself. Oh, I do so love making things
+&lt;/sarcasm&gt;
 
 But the star of the show is the [Raspberry Pi][rpi] - I have done and intend to do so many
 things with this device. I run Raspbian, and for any of this to work you need to enable I2C
@@ -30,15 +30,14 @@ And then you will need to enable the modules you need in /etc/modules:
     snd-bcm2835
     i2c-bcm2708
     i2c-dev
-    spi-dev
 
 Give the beast a reboot and she's good to go.
 
 ## Software ##
-Well, this is it so far.  Despite my total lack of Python knowledge I seem to be doing OK.  
-Got a class now which handles the byte mapping and resizing of images, I have a basic
-Interface class as well, but the layout is totally up for change as my knowledge of Python
-improves.
+Well, this is what I have so far.  Despite my total lack of Python knowledge I seem to be
+doing OK. Everything seems to be it the right place, and I have got automatic image resizing,
+and I have hooked in the original image parsing code.
+
 
 [mech]: https://sites.google.com/site/mechatronicsguy/lightscythe
 [mech2]: https://sites.google.com/site/mechatronicsguy/lightscythe-v2
