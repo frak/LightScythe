@@ -20,6 +20,7 @@ class ScytheImages:
             os.makedirs(cacheDir)
 
         self.stripType = self.LDP8806
+        self.interface = interface
 
         dirList = listdir(imageDir)
         self.fileList = []
@@ -37,7 +38,6 @@ class ScytheImages:
                 self.fileList.append((item, cachePath))
 
         interface.display('Cache up to date')
-        sleep(.5)
 
     def getFileList(self):
         return self.fileList
@@ -47,7 +47,8 @@ class ScytheImages:
     # Thanks to Pburgess from the Adafruit forums for the WS2801 code:
     # http://forums.adafruit.com/viewtopic.php?f=47&t=31962
     def getFileData(self, key):
-        img    = Image.open(self.fileList[key]).convert('RGB')
+        self.interface.display('Loding image data')
+        img    = Image.open(self.fileList[key][1]).convert('RGB')
         pixels = img.load()
         width  = img.size[0]
         height = img.size[1]

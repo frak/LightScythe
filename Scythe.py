@@ -11,16 +11,17 @@ class Scythe:
         self.interface = Interface()
         self.config    = Config()
         self.images    = Images(self.config.get('Images', 'dir'), self.interface)
-        self.maxImages = len(self.images)
 
     def runLoop(self):
-        self.interface.scytheHome()        
-
         exit          = False
-        scytheDir     = Config.SCYTHE_LEFT
         buttonPressed = False
         displayDone   = False
         imageIndex    = int(self.config.get('Images', 'current'))
+        imageList     = self.images.getFileList()
+        maxImageIndex = len(imageList)
+        (blank_column, blink_pix, column) = self.images.getFileData(imageIndex)
+
+        self.interface.scytheHome()        
 
         while(not exit):
             buttons = self.interface.buttons()
