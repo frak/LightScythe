@@ -38,7 +38,6 @@ class ScytheImages:
 
         interface.display('Cache up to date')
         sleep(.5)
-        print(self.fileList)
 
     def getFileList(self):
         return self.fileList.keys()
