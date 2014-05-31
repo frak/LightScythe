@@ -2,6 +2,10 @@ import os, ConfigParser
 from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate as LCD
 
 class Config:
+
+    SCYTHE_LEFT  = 1
+    SCYTHE_RIGHT = 2
+
     def __init__(self, path='./settings.ini'):
         self.config = ConfigParser.SafeConfigParser()
 

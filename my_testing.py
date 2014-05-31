@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import os, sys
-import settings as s
 from time import sleep
 from ScytheImages import ScytheImages as Images
 from Config import Config
@@ -21,7 +20,7 @@ class Main:
 
     def runLoop(self):
         exit = False
-        scytheDir = s.SCYTHE_LEFT
+        scytheDir = Config.SCYTHE_LEFT
         buttonPressed = False
 
         self.interface.scytheHome()
