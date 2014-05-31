@@ -22,7 +22,7 @@ class ScytheImages:
         self.stripType = self.LDP8806
 
         dirList = listdir(imageDir)
-        self.fileList = {}
+        self.fileList = []
         for item in dirList:
             path = imageDir + '/' + item
             if not os.path.isdir(path):
@@ -34,13 +34,13 @@ class ScytheImages:
                     wsize = int((float(img.size[0]) * float(hpercent)))
                     img = img.resize((self.HEIGHT, wsize), PIL.Image.ANTIALIAS)
                     img.save(cachePath)
-                self.fileList[item] = cachePath
+                self.fileList.append((item, cachePath))
 
         interface.display('Cache up to date')
         sleep(.5)
 
     def getFileList(self):
-        return self.fileList.keys()
+        return self.fileList
 
     # This is code taken from v2 of the project
     # https://sites.google.com/site/mechatronicsguy/lightscythe-v2

@@ -14,8 +14,8 @@ class Config:
             self.config.set('Display', 'colour', str(LCD.VIOLET))
             self.config.set('Display', 'timeout', str(3))
             self.config.add_section('Images')
-            self.config.set('Images', 'dir', '/images')
-            self.config.set('Images', 'current', '')
+            self.config.set('Images', 'dir', '/home/pi/images')
+            self.config.set('Images', 'current', '0')
             with open(path, 'wb') as configFile:
                 self.config.write(configFile)
         self.config.read(path)

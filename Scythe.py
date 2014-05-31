@@ -9,16 +9,18 @@ from Interface import Interface
 class Scythe:
     def __init__(self):
         self.interface = Interface()
-        self.config = Config()
-        self.images = Images(self.config.get('Images', 'dir'), self.interface)
+        self.config    = Config()
+        self.images    = Images(self.config.get('Images', 'dir'), self.interface)
+        self.maxImages = len(self.images)
 
     def runLoop(self):
-        exit = False
-        scytheDir = Config.SCYTHE_LEFT
-        buttonPressed = False
-        displayDone = False
+        self.interface.scytheHome()        
 
-        self.interface.scytheHome()
+        exit          = False
+        scytheDir     = Config.SCYTHE_LEFT
+        buttonPressed = False
+        displayDone   = False
+        imageIndex    = int(self.config.get('Images', 'current'))
 
         while(not exit):
             buttons = self.interface.buttons()
