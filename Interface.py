@@ -16,9 +16,14 @@ class Interface:
         self.display(output)
 
     def display(self, text):
+        self.lcd.display()
+        self.lcd.backlight(int(self.config.get('Display', 'Colour')))
         self.lcd.clear()
         self.lcd.message(text)
 
     def buttons(self):
         return self.lcd.buttons()
 
+    def off(self):
+        self.lcd.backlight(self.lcd.OFF)
+        self.lcd.noDisplay()

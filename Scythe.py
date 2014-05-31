@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import os, sys
+import os, sys, time
 from time import sleep
 from ScytheImages import ScytheImages as Images
 from Config import Config
@@ -25,12 +25,13 @@ class Scythe:
     def runLoop(self):
         exit          = False
         buttonPressed = False
-        displayDone   = False
         imageIndex    = int(self.config.get('Images', 'current'))
         maxImageIndex = len(self.imageList)
-        displayData   = self.newImage(imageIndex)
+        lastActivity  = time.time()
 
-        self.interface.scytheHome()        
+        self.displayData = self.newImage(imageIndex)
+
+        self.interface.scytheHome()
 
         while(not exit):
             buttons = self.interface.buttons()
@@ -46,23 +47,24 @@ class Scythe:
                     print('up')
                     if imageIndex > 0:
                         imageIndex  = imageIndex - 1
-                        displayData = self.newImage(imageIndex)
+                        self.displayData = self.newImage(imageIndex)
                 if buttons == 4:
                     print('down')
                     if imageIndex + 1 < maxImageIndex:
                         imageIndex  = imageIndex + 1
-                        displayData = self.newImage(imageIndex)
+                        self.displayData = self.newImage(imageIndex)
                 if buttons == 2:
                     print('right')
                 if buttons == 16:
                     print('left')
-                displayDone   = False
                 buttonPressed = True
+                lastActivity  = time.time()
             elif buttonPressed and buttons == 0:
                 buttonPressed = False
+            
+            if time.time() - lastActivity > 3:
+                self.interface.off()
 
-            if not displayDone:
-                displayDone = True
 
 scythe = Scythe()
 scythe.runLoop()
