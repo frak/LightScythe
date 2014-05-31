@@ -1,4 +1,5 @@
 import os, ConfigParser
+from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate as LCD
 
 class Config:
     def __init__(self, path='./settings.ini'):
