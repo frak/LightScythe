@@ -15,12 +15,10 @@ class Scythe:
         if len(self.imageList) == 0:
             raise Exception('There are no images to scythe')
 
-    def newImage(self, imageIndex):
-        (blank_column, blink_pix, column) = self.images.getFileData(imageIndex)
+    def displayImage(self, imageIndex):
         self.interface.chooseImage(self.imageList[imageIndex][0])
         sleep(1)
         self.interface.scytheHome()
-        return (blank_column, blink_pix, column)
 
     def runLoop(self):
         exit          = False
@@ -29,13 +27,16 @@ class Scythe:
         maxImageIndex = len(self.imageList)
         lastActivity  = time.time()
 
-        self.displayData = self.newImage(imageIndex)
+        self.displayData = self.images.getFileData(imageIndex)
 
         self.interface.scytheHome()
 
         while(not exit):
             buttons = self.interface.buttons()
             if not buttonPressed and buttons != 0:
+                buttonPressed = True
+                lastActivity  = time.time()
+
                 # 1 = select
                 # 2 = right
                 # 4 = down
@@ -47,18 +48,18 @@ class Scythe:
                     print('up')
                     if imageIndex > 0:
                         imageIndex  = imageIndex - 1
-                        self.displayData = self.newImage(imageIndex)
+                        self.displayData = self.images.getFileData(imageIndex)
+                    self.displayImage(imageIndex)
                 if buttons == 4:
                     print('down')
                     if imageIndex + 1 < maxImageIndex:
                         imageIndex  = imageIndex + 1
-                        self.displayData = self.newImage(imageIndex)
+                        self.displayData = self.images.getFileData(imageIndex)
+                    self.displayImage(imageIndex)
                 if buttons == 2:
                     print('right')
                 if buttons == 16:
                     print('left')
-                buttonPressed = True
-                lastActivity  = time.time()
             elif buttonPressed and buttons == 0:
                 buttonPressed = False
             
