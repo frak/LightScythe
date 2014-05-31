@@ -11,6 +11,10 @@ class Interface:
     def scytheHome(self):
         self.display('<> Scythe L/R\n^v Choose image')
 
+    def chooseImage(self, imageName):
+        output = 'Image chosen:\n' + imageName
+        self.display(output)
+
     def display(self, text):
         self.lcd.clear()
         self.lcd.message(text)

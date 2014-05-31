@@ -11,17 +11,24 @@ class Scythe:
         self.interface = Interface()
         self.config    = Config()
         self.images    = Images(self.config.get('Images', 'dir'), self.interface)
-        if len(self.images.getFileList()) == 0:
-             raise Exception('There are no imahes to scythe')
+        self.imageList = self.images.getFileList()
+        if len(self.imageList) == 0:
+            raise Exception('There are no images to scythe')
+
+    def newImage(self, imageIndex):
+        (blank_column, blink_pix, column) = self.images.getFileData(imageIndex)
+        self.interface.chooseImage(self.imageList[imageIndex][0])
+        sleep(1)
+        self.interface.scytheHome()
+        return (blank_column, blink_pix, column)
 
     def runLoop(self):
         exit          = False
         buttonPressed = False
         displayDone   = False
         imageIndex    = int(self.config.get('Images', 'current'))
-        imageList     = self.images.getFileList()
-        maxImageIndex = len(imageList)
-        (blank_column, blink_pix, column) = self.images.getFileData(imageIndex)
+        maxImageIndex = len(self.imageList)
+        displayData   = self.newImage(imageIndex)
 
         self.interface.scytheHome()        
 
@@ -37,8 +44,14 @@ class Scythe:
                     print('select')
                 if buttons == 8:
                     print('up')
+                    if imageIndex > 0:
+                        imageIndex  = imageIndex - 1
+                        displayData = self.newImage(imageIndex)
                 if buttons == 4:
                     print('down')
+                    if imageIndex + 1 < maxImageIndex:
+                        imageIndex  = imageIndex + 1
+                        displayData = self.newImage(imageIndex)
                 if buttons == 2:
                     print('right')
                 if buttons == 16:

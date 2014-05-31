@@ -45,7 +45,7 @@ class ScytheImages:
     # This is code taken from v2 of the project
     # https://sites.google.com/site/mechatronicsguy/lightscythe-v2
     def getFileData(self, key):
-        self.interface.display('Loding image data')
+        self.interface.display('Loding image')
         img    = Image.open(self.fileList[key][1]).convert('RGB')
         pixels = img.load()
         width  = img.size[0]
