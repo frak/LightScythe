@@ -11,6 +11,8 @@ class Scythe:
         self.interface = Interface()
         self.config    = Config()
         self.images    = Images(self.config.get('Images', 'dir'), self.interface)
+        if len(self.images.getFileList()) == 0:
+             raise Exception('There are no imahes to scythe')
 
     def runLoop(self):
         exit          = False

@@ -44,8 +44,6 @@ class ScytheImages:
 
     # This is code taken from v2 of the project
     # https://sites.google.com/site/mechatronicsguy/lightscythe-v2
-    # Thanks to Pburgess from the Adafruit forums for the WS2801 code:
-    # http://forums.adafruit.com/viewtopic.php?f=47&t=31962
     def getFileData(self, key):
         self.interface.display('Loding image data')
         img    = Image.open(self.fileList[key][1]).convert('RGB')
