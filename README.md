@@ -50,7 +50,14 @@ On the first run, it will create a settings.ini file in the project root which w
 images to be found in /home/pi/images - if it cannot find either the directory or any images the
 script will terminate.  When it loads, any images found in that directly will be automatically 
 resized to the correct height, and the resized image will be saved in a "preocessed" sub-directory.
-You can also set the display colour and timeout here, using the constants found in Adafruit_CharLCDPlate.py
+You can also set the display colour and timeout here, using the colour constants found in 
+Adafruit_CharLCDPlate.py and any number in seconds for the timeout.
+
+There are many ways to get your Pi to run this script automatically on boot, which you will need out
+in the field, however, the simplest option I found was to use crontab. Just run `crontab -e` and add
+the following:
+
+    @reboot /home/pi/LightScythe/Scythe.py &
 
 [mech]: https://sites.google.com/site/mechatronicsguy/lightscythe
 [mech2]: https://sites.google.com/site/mechatronicsguy/lightscythe-v2
