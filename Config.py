@@ -9,6 +9,7 @@ class Config:
 
     def __init__(self, path='./settings.ini'):
         self.config = ConfigParser.SafeConfigParser()
+        self.path = path
 
         if not os.path.isfile(path):
             self.config.add_section('Display')
@@ -17,15 +18,17 @@ class Config:
             self.config.add_section('Images')
             self.config.set('Images', 'dir', '/home/pi/images')
             self.config.set('Images', 'current', '0')
-            with open(path, 'wb') as configFile:
+            with open(self.path, 'wb') as configFile:
                 self.config.write(configFile)
-        self.config.read(path)
+        self.config.read(self.path)
 
     def get(self, section, key):
         return self.config.get(section, key)
 
     def set(self, section, key, value):
-        return self.config.set(section, key, value)
+        self.config.set(section, key, value)
+        with open(self.path, 'wb') as configFile:
+            self.config.write(configFile)
         
     def getSections(self):
         return self.config.sections()
