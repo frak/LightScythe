@@ -69,6 +69,13 @@ Just run `crontab -e` and add the following:
 
     @reboot /home/pi/LightScythe/Scythe.py &
 
+## Next Steps ##
+Well, now I need some hardware - I have ordered some of the [OpenBeams][openbeam] that
+I need, and I am in contact with someone who should be able to do the laser cutting
+for me but the hardest part is going to be attaching the LCD plate to the Scythe. I
+am hoping I can working something out just using OpenBeam as I really don't want to
+get into designing custom parts...
+
 [mech]: https://sites.google.com/site/mechatronicsguy/lightscythe
 [mech2]: https://sites.google.com/site/mechatronicsguy/lightscythe-v2
 [adafruit]: https://learn.adafruit.com/light-painting-with-raspberry-pi
