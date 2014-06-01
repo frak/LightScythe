@@ -84,3 +84,4 @@ get into designing custom parts...
 [rpi]: http://www.raspberrypi.org/
 [i2c]: http://skpang.co.uk/blog/archives/575
 [spi]: http://quick2wire.com/non-root-access-to-spi-on-the-pi/
+[openbeam]: http://www.openbeamusa.com/
