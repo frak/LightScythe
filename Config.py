@@ -5,6 +5,7 @@ class Config:
 
     SCYTHE_LEFT  = 1
     SCYTHE_RIGHT = 2
+    DEVICE       = '/dev/spidev0.0'
 
     def __init__(self, path='./settings.ini'):
         self.config = ConfigParser.SafeConfigParser()

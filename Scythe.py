@@ -5,6 +5,7 @@ from time import sleep
 from ScytheImages import ScytheImages as Images
 from Config import Config
 from Interface import Interface
+from Renderer import Renderer
 
 class Scythe:
     def __init__(self):
@@ -28,6 +29,7 @@ class Scythe:
         lastActivity  = time.time()
 
         self.displayData = self.images.getFileData(imageIndex)
+        self.renderer    =  Renderer(self.config, self.displayData)
 
         self.interface.scytheHome()
 
@@ -67,5 +69,4 @@ class Scythe:
                 self.interface.off()
 
 
-scythe = Scythe()
-scythe.runLoop()
+Scythe().runLoop()
