@@ -35,8 +35,15 @@ And then you will need to enable the modules you need in /etc/modules:
 In order to allow non-root access to the [I2C][i2c] and [SPI][spi] pins:
 
     sudo adduser pi i2c
+    sudo groupadd -f --system spi
+    sudo adduser pi spi  # This may say that pi is already a member of the group, don't panic
 
-Give the beast a reboot and she's good to go.
+You will then need to create `/etc/udev/rules.d/90-spi.rules` and add the following line:
+
+    SUBSYSTEM=="spidev", GROUP="spi"
+
+Give the beast a reboot and she's good to go.  You should now be able to run the code without
+being root.
 
 ## Software ##
 Well, this is what I have so far.  Despite my total lack of Python knowledge I seem to be
