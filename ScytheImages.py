@@ -7,9 +7,9 @@ from PIL import Image
 
 class ScytheImages:
     # Constants for images
-    HEIGHT = 64
+    HEIGHT  = 64
     LDP8806 = 1
-    WS2801 = 2
+    WS2801  = 2
 
     def __init__(self, imageDir, interface):
         if not os.path.exists(imageDir):

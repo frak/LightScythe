@@ -1,8 +1,9 @@
 # LightScythe v3 #
 ## Credits ##
 This project could not exist were it not for the work of [The Mechatronics Guy][mech],
-[and his update][mech2].  The work I have done here is largely based on his list of
-improvements.  Thanks dude.
+[and his update][mech2].  The work I am doing here is largely based on his list of
+improvements.  Thanks dude.  Credit also has to be given to [Adafruit][adafruit] for
+their code and components - you guys saved me a lot of hard work!
 
 ## Hardware ##
 As I didn't want to get involved with wiring buttons directly to the GPIO pins on my Pi
@@ -31,6 +32,10 @@ And then you will need to enable the modules you need in /etc/modules:
     i2c-bcm2708
     i2c-dev
 
+In order to allow non-root access to the [I2C][i2c] and [SPI][spi] pins:
+
+    sudo adduser pi i2c
+
 Give the beast a reboot and she's good to go.
 
 ## Software ##
@@ -41,6 +46,9 @@ and I have hooked in the original image parsing code.
 
 [mech]: https://sites.google.com/site/mechatronicsguy/lightscythe
 [mech2]: https://sites.google.com/site/mechatronicsguy/lightscythe-v2
+[adafruit]: https://learn.adafruit.com/light-painting-with-raspberry-pi
 [ada]: https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi
 [ada2]: https://learn.adafruit.com/digital-led-strip
 [rpi]: http://www.raspberrypi.org/
+[i2c]: http://skpang.co.uk/blog/archives/575
+[spi]: http://quick2wire.com/non-root-access-to-spi-on-the-pi/
