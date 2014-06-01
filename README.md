@@ -14,7 +14,7 @@ pins in a row that need to be soldered precisely.
 
 Of course, for the strip I used 2 metres of the [Adafruit Digital LED Strip][ada2], so
 I guess the next step for this is making the scythe itself. Oh, I do so love making things
-`&lt;/sarcasm&gt;`
+`</sarcasm>`
 
 But the star of the show is the [Raspberry Pi][rpi] - I have done and intend to do so many
 things with this device. I run Raspbian, and for any of this to work you need to enable I2C
