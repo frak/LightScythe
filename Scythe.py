@@ -47,6 +47,8 @@ class Scythe:
                 # 16 = left
                 if buttons == 1:
                     print('select')
+                    self.interface.off()
+                    sys.exit(0)
                 if buttons == 8:
                     print('up')
                     if imageIndex > 0:
