@@ -41,8 +41,16 @@ Give the beast a reboot and she's good to go.
 ## Software ##
 Well, this is what I have so far.  Despite my total lack of Python knowledge I seem to be
 doing OK. Everything seems to be it the right place, and I have got automatic image resizing,
-and I have hooked in the original image parsing code.
+and I have hooked in the original image parsing code.  Once you have everything setup, you just
+need to run:
 
+    ./Scythe.py
+
+On the first run, it will create a settings.ini file in the project root which will expect the
+images to be found in /home/pi/images - if it cannot find either the directory or any images the
+script will terminate.  When it loads, any images found in that directly will be automatically 
+resized to the correct height, and the resized image will be saved in a "preocessed" sub-directory.
+You can also set the display colour and timeout here, using the constants found in Adafruit_CharLCDPlate.py
 
 [mech]: https://sites.google.com/site/mechatronicsguy/lightscythe
 [mech2]: https://sites.google.com/site/mechatronicsguy/lightscythe-v2

@@ -26,6 +26,7 @@ class Scythe:
         exit          = False
         buttonPressed = False
         imageIndex    = int(self.config.get('Images', 'current'))
+        timeout       = int(self.config.get('Display', 'timeout'))
         maxImageIndex = len(self.imageList)
         lastActivity  = time.time()
 
@@ -69,7 +70,7 @@ class Scythe:
             elif buttonPressed and buttons == 0:
                 buttonPressed = False
             
-            if time.time() - lastActivity > 3:
+            if time.time() - lastActivity > timeout:
                 self.interface.off()
 
 
