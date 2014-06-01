@@ -18,6 +18,7 @@ class Scythe:
 
     def displayImage(self, imageIndex):
         self.interface.chooseImage(self.imageList[imageIndex][0])
+        self.config.set('Images', 'current', str(imageIndex))
         sleep(1)
         self.interface.scytheHome()
 
