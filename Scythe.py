@@ -29,9 +29,10 @@ class Scythe:
         lastActivity  = time.time()
 
         self.displayData = self.images.getFileData(imageIndex)
-        self.renderer    =  Renderer(self.config, self.displayData)
+        self.renderer    =  Renderer(self.config, self.displayData, self.interface)
 
         self.interface.scytheHome()
+        self.renderer.blank()
 
         while(not exit):
             buttons = self.interface.buttons()
