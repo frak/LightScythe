@@ -73,5 +73,5 @@ class Scythe:
             if time.time() - lastActivity > timeout:
                 self.interface.off()
 
-
-Scythe().runLoop()
+if __name__ == "__main__":
+    Scythe().runLoop()
