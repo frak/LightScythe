@@ -99,14 +99,14 @@ Pi to be as protected as possible.  To do this, I first created a breakout conne
 which is just two USB sockets mounted on veroboard with two racks of solderless headers
 for connecting directly to the LEDs:
 
-![Top down view of the power breakout](/images/connector-top.jpg?raw=true)
-![A view of my not so excellent sodlering skills](/images/connector-bottom.jpg?raw=true)
+![Top down view of the power breakout](/images/connector-top.jpg?raw=true "Top down view of the power breakout")
+![A view of my not so excellent sodlering skills](/images/connector-bottom.jpg?raw=true "A view of my not so excellent sodlering skills")
 
 As the USB connectors are facing away from each other, their polarity will be reversed.
 Another issue to fix is that most USB cables are not rated for such a high current. I
 solved both of these problems by making my own USB crossover cable with 6A houshold wires.
 
-![My 6A crossover cable](/images/usb-crossover.jpg?raw=true)
+![My 6A crossover cable](/images/usb-crossover.jpg?raw=true "My 6A crossover cable")
 
 **It is important to remember that you must swap the GND and 5V wires on one end of the
 cable otherwise you will be passing the wrong polarity into your Raspberry Pi.**
