@@ -16,6 +16,7 @@ Of course, for the strip I used 2 metres of the [Adafruit Digital LED Strip][ada
 I guess the next step for this is making the scythe itself. Oh, I do so love making things
 `</sarcasm>`
 
+## Raspberry Pi ##
 But the star of the show is the [Raspberry Pi][rpi] - I have done and intend to do so many
 things with this device. I run Raspbian, and for any of this to work you need to enable I2C
 (for the display and buttons) and SPI (for the light strip).  To do this you will first
@@ -43,6 +44,30 @@ the following line:
 
 Give the beast a reboot and she's good to go.  You should now be able to run the
 code without being root.
+
+### Power Supply ###
+This was not as straight-forward as it first seemed.  To power the lights, you need
+a theoretical maximum of 2A per meter of lights, and then another amp or so to power
+the Pi, so I chose [this 5v 5800mAh battery from eBay][battery] which looks like it
+will have plenty of power for the job.  However, one thing that is not made clear
+either by Adafruit or The Mechatronics Guy is that just adding this power to the 5V
+GPIO pin means that your Pi will be completely exposed to the high current coming
+from the battery.  You can take your chances with this one if you like, I prefer my
+Pi to be as protected as possible.  To do this, I first created a breakout connector,
+which is just two USB sockets mounted on veroboard with two racks of solderless headers
+for connected directly to the LEDs:
+
+![Top down view of the power breakout](/images/connector-top.jpg?raw=true)
+![A view of my not so excellent sodlering skills](/images/connector-bottom.jpg?raw=true)
+
+As the USB connectors are facing away from each other, their polarity will be reversed.
+Another issue to fix is that most USB cables are not rated for such a high current. I
+solved both of these problems by making my own USB crossover cable with 6A houshold wires.
+
+![My 6A crossover cable](/images/usb-crossover.jpg?raw=true)
+
+**It is important to remember that you must swap the GND and 5V wires on one of the ends
+of the cable otherwise you will be passing the wrong polarity into your Raspberry Pi.**
 
 ## Software ##
 Well, this is what I have so far.  Despite my total lack of Python knowledge I seem
@@ -85,3 +110,4 @@ into designing custom parts...
 [i2c]: http://skpang.co.uk/blog/archives/575
 [spi]: http://quick2wire.com/non-root-access-to-spi-on-the-pi/
 [openbeam]: http://www.openbeamusa.com/
+[battery]: http://www.ebay.co.uk/itm/12V-3800mah-5V-USB-5800mah-DC-Rechargeable-Li-ion-Battery-Pack-with-UK-charger-/171337179921
