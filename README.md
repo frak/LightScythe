@@ -55,7 +55,7 @@ GPIO pin means that your Pi will be completely exposed to the high current comin
 from the battery.  You can take your chances with this one if you like, I prefer my
 Pi to be as protected as possible.  To do this, I first created a breakout connector,
 which is just two USB sockets mounted on veroboard with two racks of solderless headers
-for connected directly to the LEDs:
+for connecting directly to the LEDs:
 
 ![Top down view of the power breakout](/images/connector-top.jpg?raw=true)
 ![A view of my not so excellent sodlering skills](/images/connector-bottom.jpg?raw=true)
