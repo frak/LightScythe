@@ -115,9 +115,9 @@ cable otherwise you will be passing the wrong polarity into your Raspberry Pi.**
 Well, this is what I have so far.  Despite my total lack of Python knowledge I seem
 to be doing OK. Everything seems to be it the right place, and I have got automatic
 image resizing, and I have hooked in the original image parsing code.  Once you have
-everything setup, you just need to run:
+everything setup, you just need to run the following from the project root.
 
-    ./Scythe.py
+    scythe/Scythe.py
 
 On the first run, it will create a settings.ini file in the project root which will expect
 the images to be found in /home/pi/images - if it cannot find either the directory or any
@@ -134,7 +134,7 @@ There are many ways to get your Pi to run this script automatically on boot whic
 will need out in the field, however, the simplest option I found was to use crontab. 
 Just run `crontab -e` and add the following:
 
-    @reboot /home/pi/LightScythe/Scythe.py &
+    @reboot /home/pi/LightScythe/scythe/Scythe.py &
 
 ## Next Steps ##
 Well, now I need some hardware - I have ordered some of the [OpenBeams][openbeam] that
