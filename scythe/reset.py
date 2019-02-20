@@ -1,14 +1,19 @@
 #!/usr/bin/python
 
-from time import sleep
-from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
+import board
+import busio
+import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
 
-class LCDDisplay:
-    def __init__(self, busnum=-1, addr=0x20, debug=True):
-        self.lcd = Adafruit_CharLCDPlate(busnum, addr, debug)
-        self.lcd.backlight(self.lcd.OFF)
-        self.lcd.noDisplay()
+
+def clear():
+    lcd_columns = 16
+    lcd_rows = 2
+    i2c = busio.I2C(board.SCL, board.SDA)
+    lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
+    lcd.clear()
+    lcd.color = [0, 0, 0]
+
 
 if __name__ == '__main__':
-    display = LCDDisplay()
+    clear()
 

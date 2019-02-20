@@ -1,107 +1,110 @@
-import os, sys
+import os
 from os import listdir
-from os.path import isfile, join
-from time import sleep
 import PIL
 from PIL import Image
 
+
 class ScytheImages:
     # Constants for images
-    HEIGHT  = 64
+    HEIGHT = 64
     LDP8806 = 1
-    WS2801  = 2
+    WS2801 = 2
 
-    def __init__(self, imageDir, interface):
-        if not os.path.exists(imageDir):
-            raise Exception('Image directory (' + imageDir + ') does not exist')
+    def __init__(self, image_dir, lcd_plate):
+        if not os.path.exists(image_dir):
+            lcd_plate.fatal_error('No image dir @\n' + image_dir)
+            raise Exception('Image directory (' + image_dir + ') does not exist')
 
-        cacheDir = imageDir + '/processed'
-        if not os.path.exists(cacheDir):
-            os.makedirs(cacheDir)
+        cache_dir = image_dir + '/processed'
+        if not os.path.exists(cache_dir):
+            os.makedirs(cache_dir)
 
-        self.stripType = self.LDP8806
-        self.interface = interface
+        self.strip_type = self.LDP8806
+        self.lcd_plate = lcd_plate
 
-        dirList = listdir(imageDir)
+        dir_list = listdir(image_dir)
         self.fileList = []
-        for item in dirList:
-            path = imageDir + '/' + item
+        for item in dir_list:
+            path = image_dir + '/' + item
             if not os.path.isdir(path):
-                cachePath = cacheDir + '/' + item
-                if not os.path.exists(cachePath):
-                    interface.display('Resizing...\n' + item)
+                cache_path = cache_dir + '/' + item
+                if not os.path.exists(cache_path):
+                    lcd_plate.display('Creating raster\n' + item)
                     img = Image.open(path)
-                    hpercent = (self.HEIGHT/float(img.size[1]))
+                    hpercent = (self.HEIGHT / float(img.size[1]))
                     wsize = int((float(img.size[0]) * float(hpercent)))
                     img = img.resize((self.HEIGHT, wsize), PIL.Image.ANTIALIAS)
-                    img.save(cachePath)
-                self.fileList.append((item, cachePath))
+                    img.save(cache_path)
+                self.fileList.append((item, cache_path))
 
-        interface.display('Cache up to date')
+        lcd_plate.display('Cache up to date')
 
-    def getFileList(self):
+    def get_file_list(self):
         return self.fileList
 
     # This is code taken from v2 of the project
     # https://sites.google.com/site/mechatronicsguy/lightscythe-v2
-    def getFileData(self, key):
-        self.interface.display('Loding image')
-        img    = Image.open(self.fileList[key][1]).convert('RGB')
+    def get_file_data(self, key):
+        image_name = self.fileList[key][1].rsplit('/')[-1]
+        print('Image name: ' + image_name)
+        self.lcd_plate.display('Loading image\n' + image_name)
+        img = Image.open(self.fileList[key][1]).convert('RGB')
         pixels = img.load()
-        width  = img.size[0]
+        width = img.size[0]
         height = img.size[1]
-        print("%dx%d pixels" % img.size)
-        
+        print("  %dx%d pixels" % img.size)
+
         # Calculate gamma correction table.  This includes
         # LPD8806-specific conversion (7-bit color w/high bit set).
-        if self.stripType == self.LDP8806:
+        if self.strip_type == self.LDP8806:
             gamma = bytearray(256)
             for i in range(256):
                 gamma[i] = 0x80 | int(pow(float(i) / 255.0, 2.5) * 127.0 + 0.5)
-        if self.stripType == self.WS2801:
+        if self.strip_type == self.WS2801:
             gamma = bytearray(256)
             for i in range(256):
                 gamma[i] = int(pow(float(i) / 255.0, 2.5) * 255.0 + 0.5)
 
         # Create list of bytearrays, one for each columns of image.
         # R, G, B byte per pixel, plus extra '0' byte at end for latch.
-        print "Allocating..."
+        print("  allocating...")
         columns = [0 for x in range(width)]
         for x in range(width):
-            if self.stripType == self.LDP8806:
+            if self.strip_type == self.LDP8806:
                 columns[x] = bytearray(height * 3 + 1)
-            if self.stripType == self.WS2801:
+            if self.strip_type == self.WS2801:
                 columns[x] = bytearray(height * 3)
-        
-        blankColumn = bytearray(len(columns[0]))
-        blinkPix = bytearray(3)
-        if self.stripType == self.LDP8806:
-            for x in range(height*3+1):
-                blankColumn[x] = gamma[0]
-            blinkPix[0] = gamma[255]
-            blinkPix[1] = gamma[0]
-            blinkPix[2] = gamma[0]
-        if self.stripType == self.WS2801:
-            for x in range(height*3):
-                blankColumn[x] = gamma[0]
-            blinkPix[0] = gamma[0]
-            blinkPix[1] = gamma[255]
-            blinkPix[2] = gamma[0]
+
+        blank_column = bytearray(len(columns[0]))
+        blink_pix = bytearray(3)
+        if self.strip_type == self.LDP8806:
+            for x in range(height * 3 + 1):
+                blank_column[x] = gamma[0]
+            blink_pix[0] = gamma[255]
+            blink_pix[1] = gamma[0]
+            blink_pix[2] = gamma[0]
+        if self.strip_type == self.WS2801:
+            for x in range(height * 3):
+                blank_column[x] = gamma[0]
+            blink_pix[0] = gamma[0]
+            blink_pix[1] = gamma[255]
+            blink_pix[2] = gamma[0]
 
         # Convert 8-bit RGB image into columns-wise GRB bytearray list.
-        print "Converting..."
+        print("  converting...")
         for x in range(width):
             for y in range(height):
                 value = pixels[x, y]
                 y3 = y * 3
-                if self.stripType == self.LDP8806:
-                    #GRB
-                    columns[x][y3]     = gamma[value[1]]
+                if self.strip_type == self.LDP8806:
+                    # GRB
+                    columns[x][y3] = gamma[value[1]]
                     columns[x][y3 + 1] = gamma[value[0]]
                     columns[x][y3 + 2] = gamma[value[2]]
-                if self.stripType == self.WS2801:
-                    #BGR
-                    columns[x][y3]     = gamma[value[2]]
+                if self.strip_type == self.WS2801:
+                    # BGR
+                    columns[x][y3] = gamma[value[2]]
                     columns[x][y3 + 1] = gamma[value[1]]
                     columns[x][y3 + 2] = gamma[value[0]]
-        return (blankColumn, blinkPix, columns)
+        print("done.")
+        return blank_column, blink_pix, columns

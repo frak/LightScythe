@@ -1,4 +1,3 @@
 *.pyc
-settings.ini
-web-ui/vendor/
-
+.idea/
+.DS_Store
