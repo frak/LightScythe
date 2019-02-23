@@ -35,7 +35,6 @@ class LcdPlate:
         self.lcd.color = colours[self.config.get('Display', 'Colour')]
 
     def off(self):
-        self.lcd.clear()
         self.lcd.color = colours['BLACK']
 
     def left_button(self):
@@ -55,7 +54,3 @@ class LcdPlate:
 
     def clear(self):
         self.lcd.clear()
-
-
-if __name__ == '__main__':
-    plate = LcdPlate()
