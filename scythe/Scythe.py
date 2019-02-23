@@ -15,15 +15,15 @@ class Scythe:
         self.config = Config()
         self.lcd_plate = LcdPlate()
         self.images = Images(self.config.get('Images', 'dir'), self.lcd_plate)
-        self.imageList = self.images.get_file_list()
+        self.image_list = self.images.get_file_list()
         self.renderer = None
         self.display_data = None
-        if len(self.imageList) == 0:
+        if len(self.image_list) == 0:
             self.lcd_plate.fatal_error('No images!')
             raise Exception('There are no images to scythe')
 
     def display_image(self, image_index):
-        self.lcd_plate.choose_image(self.imageList[image_index][0])
+        self.lcd_plate.choose_image(self.image_list[image_index][0])
         self.config.set('Images', 'current', str(image_index))
         sleep(1)
         self.lcd_plate.scythe_home()
@@ -31,7 +31,7 @@ class Scythe:
     def loop(self):
         image_index = int(self.config.get('Images', 'current'))
         timeout = int(self.config.get('Display', 'timeout'))
-        max_image_index = len(self.imageList)
+        max_image_index = len(self.image_list)
 
         display_data = self.images.get_file_data(image_index)
         renderer = Renderer(self.config, self.lcd_plate, display_data)
