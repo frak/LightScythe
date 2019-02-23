@@ -10,8 +10,13 @@ components - together, you guys have saved me a lot of hard work!
 ### Raspberry Pi ###
 We use a [Raspberry Pi Zero W][pizero] - the linked one includes a full GPIO header
 but this is not the default, make sure the header exists or that you purchase a kit for 
-[attaching this yourself][hammer].  To protect the device, I also bought a [Pibow case]
-[case].
+[attaching this yourself][hammer].  
+
+![RPi with GPIO header attached](/images/pi-with-header.jpg?raw=true "RPi with GPIO header attached")
+
+To protect the device, I also bought a [Pibow case][case].
+
+![RPi in Pibow case](/images/pi-in-case.jpg?raw=true "RPi in Pibow case")
 
 ### LCD Plate ###
 As I didn't want to get involved with wiring buttons directly to the GPIO pins on my Pi
@@ -21,18 +26,22 @@ require a certain level of dexterity with a soldering iron.
 
 ![GPIO pinout diagram](/images/raspberry-pi-pinout.png?raw=true "GPIO pinout diagram")
 
-Once assembled insert two thin wires into the MOSI (BCOM 10 / 19) and SCLK (BCOM 11 / 23) 
-SPI sockets. Then attach the LCD plate to the Pi taking care to ensure that nothing is 
-forced excessively or unevenly. 
+Once assembled insert two **thin** wires into the MOSI (BCOM 10 / 19) and SCLK (BCOM 11 / 23) 
+SPI sockets. 
 
-![Pi attached to LCD plate](/images/pi-and-plate.jpg?raw=true "Pi attached to LCD plate")
+![Wires inserted into LCD plate socket](/images/wires-in-lcd-plate.jpg?raw=true "Wires inserted into LCD plate socket")
+
+Then attach the LCD plate to the Pi taking care to ensure that nothing is forced excessively 
+or unevenly. 
+
+![Pi attached to LCD plate](/images/pi-and-plate-closeup.jpg?raw=true "Pi attached to LCD plate")
+
+![Pi attached to LCD plate with SPI cable showing](/images/pi-and-plate-with-cable.jpg?raw=true "Pi attached to LCD plate with SPI cable showing")
 
 ### Scythe ###
 For the Scythe itself, I am using 2 x [1m lengths of OpenBeam][obeam] that are held 
 together with the handle template provided by [the Mechatronics guy][thingv]. I have 
 then used velcro to attach the [Adafruit Digital LED Strip][ada2] to the beam.
-
-`![Pi attached to LCD plate](/images/pi-and-plate.jpg?raw=true "Pi attached to LCD plate")`
 
 To power the lights, you need a theoretical maximum of 2A per meter of lights, and then 
 another amp or so to power the Pi, so I chose [this 5v 5800mAh battery from eBay][battery] 
